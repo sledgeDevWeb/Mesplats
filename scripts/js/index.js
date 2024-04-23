@@ -1,6 +1,9 @@
 import { recipes } from './dataBase/recipes.js'
 import { recipeTemplate } from './templates/recipeFactory.js'
 
+import {selectFilter, applyFilters} from './functions/filters.js'
+import { showCounterRecipes } from './functions/recipesCounter.js'
+
 getRecipes()
 
 // sert à récupérer les recettes depuis recipes.js
