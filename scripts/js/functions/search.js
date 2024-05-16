@@ -6,7 +6,7 @@ import {showCounterRecipes, countDisplayedRecipes} from './recipes.counter.js'
 function searchRecipes(searchText) {
     const searchFilteredRecipes = []
     const lowerSearchText = searchText.toLowerCase()
-    if (searchText.length >= 3) {
+    if (searchText.length <= 3) {
         for (const recipe of recipes) {
             if (recipe.name.toLowerCase().includes(lowerSearchText)) {
                 searchFilteredRecipes.push(recipe)
