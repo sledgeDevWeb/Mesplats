@@ -19,6 +19,31 @@ export function searchRecipes(searchText) {
     }
 }
 
+// let searchTimeout;
+
+// export function searchRecipes(searchText, delay = 300) {
+//     clearTimeout(searchTimeout);
+    
+//     searchTimeout = setTimeout(() => {
+//         const lowerSearchText = searchText.toLowerCase();
+//         let searchFilteredRecipes;
+        
+//         if (searchText.length >= 3) {
+//             searchFilteredRecipes = recipes.filter(recipe => {
+//                 return recipe.name.toLowerCase().includes(lowerSearchText)
+//                     || recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(lowerSearchText))
+//                     || recipe.description.toLowerCase().includes(lowerSearchText);
+//             });
+//         } else {
+//             searchFilteredRecipes = recipes;
+//         }
+
+//         console.log(searchFilteredRecipes); 
+  
+//     }, delay);
+// }
+
+
 // affiche constamment le nombre de recettes affichées sur la page, même sans effectuer de recherche 
 document.addEventListener('DOMContentLoaded', function() {
     // Calcul du nombre total de recettes
