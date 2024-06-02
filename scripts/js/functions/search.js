@@ -1,51 +1,48 @@
 import { recipes } from '../dataBase/recipes.js'
 import { recipeTemplate } from '../templates/recipeFactory.js'
-import {showCounterRecipes, countDisplayedRecipes} from './recipes.counter.js'
+import { getFiltersAppliances, getFiltersIngredients, getFiltersUstensils } from '../index.js'
+import {filtersSelected, filterRecipesBySelectedFilters} from './filters.js'
+import { showCounterRecipes, countDisplayedRecipes } from './recipesCounter.js'
 
 // Fonction pour filtrer les recettes en fonction de la recherche
-function searchRecipes(searchText) {
-    const searchFilteredRecipes = []
+export function searchRecipes(searchText) {
     const lowerSearchText = searchText.toLowerCase()
-    if (searchText.length <= 3) {
-        for (const recipe of recipes) {
-            if (recipe.name.toLowerCase().includes(lowerSearchText)) {
-                searchFilteredRecipes.push(recipe)
-            } else if (recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(lowerSearchText))) {
-                searchFilteredRecipes.push(recipe)
-            } else if (recipe.description.toLowerCase().includes(lowerSearchText)) {
-                searchFilteredRecipes.push(recipe)
-            }
-        }
-    }
-
-    return searchFilteredRecipes
-}
-
-// Fonction pour mettre à jour l'affichage des recettes
-function updateRecipeDisplay(filteredRecipes) {
-    const cardRecipe = document.querySelector('.hero')
-    cardRecipe.innerHTML = ''
-    for (const recipe of filteredRecipes) {
-        const recipeModel = recipeTemplate()
-        const recipeDOM = recipeModel.getRecipeDOM(recipe)
-        cardRecipe.appendChild(recipeDOM)
+    if (searchText.length >= 3) {
+        const searchFilteredRecipes = recipes.filter(recipe => {
+            return recipe.name.toLowerCase().includes(lowerSearchText)
+                || recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(lowerSearchText))
+                || recipe.description.toLowerCase().includes(lowerSearchText)
+        })
+            return searchFilteredRecipes
+    } else {
+        return recipes
     }
 }
 
-// Fonction pour gérer les événements de saisie dans la barre de recherche
-function searchInput() {
-    const searchInput = document.getElementById('recipe-search')
-    searchInput.addEventListener('input', () => {
-        const searchText = searchInput.value
-        const filteredRecipes = searchRecipes(searchText)
-        updateRecipeDisplay(filteredRecipes)
-        // Calcule le nombre de recettes affichées
-        const numDisplayedRecipes = countDisplayedRecipes()
+// let searchTimeout;
 
-        // Met à jour le compteur de recettes
-        showCounterRecipes(numDisplayedRecipes)
-    })
-}
+// export function searchRecipes(searchText, delay = 300) {
+//     clearTimeout(searchTimeout);
+    
+//     searchTimeout = setTimeout(() => {
+//         const lowerSearchText = searchText.toLowerCase();
+//         let searchFilteredRecipes;
+        
+//         if (searchText.length >= 3) {
+//             searchFilteredRecipes = recipes.filter(recipe => {
+//                 return recipe.name.toLowerCase().includes(lowerSearchText)
+//                     || recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(lowerSearchText))
+//                     || recipe.description.toLowerCase().includes(lowerSearchText);
+//             });
+//         } else {
+//             searchFilteredRecipes = recipes;
+//         }
+
+//         console.log(searchFilteredRecipes); 
+  
+//     }, delay);
+// }
+
 
 // affiche constamment le nombre de recettes affichées sur la page, même sans effectuer de recherche 
 document.addEventListener('DOMContentLoaded', function() {
@@ -58,6 +55,56 @@ document.addEventListener('DOMContentLoaded', function() {
     // Appel de la fonction pour gérer les événements de saisie
     searchInput()
 })
+
+// Fonction pour gérer les événements de saisie dans la barre de recherche
+function searchInput() {
+    
+    const searchInput = document.getElementById('recipe-search')
+    const recipeContainer = document.querySelector('.hero')
+
+    searchInput.addEventListener('input', () => {
+
+        const searchText = searchInput.value
+        let filteredRecipes = searchRecipes(searchText)
+        
+        if (filtersSelected.length) {
+            filteredRecipes = filterRecipesBySelectedFilters(filteredRecipes, filtersSelected)
+        }
+        updateRecipeDisplay(filteredRecipes)
+
+        if (filteredRecipes.length === 0) {
+            // Si aucune recette n'est trouvée, affiche un message
+            recipeContainer.innerHTML = `<div class="sort__counter">Aucune recette ne contient « ${searchInput.value} » 
+            vous pouvez chercher « tarte aux pommes », « poisson », etc.</div>`
+        } else {
+            // Si des recettes sont trouvées, affiche les cartes recettes
+            getFiltersIngredients()
+            getFiltersAppliances()
+            getFiltersUstensils()
+        }
+
+        // Calcule le nombre de recettes affichées
+        const numDisplayedRecipes = countDisplayedRecipes()
+
+        // Met à jour le compteur de recettes
+        showCounterRecipes(numDisplayedRecipes)
+    })
+}
+
+// Fonction pour mettre à jour l'affichage des recettes
+export function updateRecipeDisplay(filteredRecipes) {
+    
+    const cardRecipe = document.querySelector('.hero')
+    cardRecipe.innerHTML = ''
+
+    for (const recipe of filteredRecipes) {
+        
+            const recipeModel = recipeTemplate()
+            const recipeDOM = recipeModel.getRecipeDOM(recipe)
+            cardRecipe.appendChild(recipeDOM)
+        
+    }
+}
 
 // Appel de la fonction pour gérer les événements de saisie
 searchInput()

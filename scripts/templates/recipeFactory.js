@@ -1,3 +1,5 @@
+import {recipes} from '../dataBase/recipes.js'
+
 export function recipeTemplate() {
     function getRecipeDOM(recipe) {
         const cardRecipe = document.querySelector('.hero')
@@ -27,7 +29,7 @@ export function recipeTemplate() {
         h4ElementTitle.className = 'hero__container__recipe__element__title'
         ulElementRecipe.className = 'hero__container__recipe__element__list'
 
-        // imgRecipe.setAttribute('alt', `${recipe.name}`)
+        imgRecipe.setAttribute('alt', `${recipe.name}`)
         imgRecipe.setAttribute('src', recipe.image)
         pTimeRecipe.innerHTML = `${recipe.time} min`
         h2TitleRecipe.innerHTML = `${recipe.name}`

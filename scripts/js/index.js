@@ -1,6 +1,7 @@
 import { recipes } from './dataBase/recipes.js'
 import { recipeTemplate } from './templates/recipeFactory.js'
-import { filterTemplate } from './functions/filter-search.js'
+ import { filterTemplate } from './functions/filter-search.js'
+
 import {selectFilter, applyFilters} from './functions/filters.js'
 import { showCounterRecipes } from './functions/recipesCounter.js'
 

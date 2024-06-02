@@ -1,5 +1,5 @@
 import {getFiltersAppliances, getFiltersIngredients, getFiltersUstensils} from '../index.js'
-import { searchRecipes, updateRecipeDisplay } from './searchForOf.js'
+import { searchRecipes, updateRecipeDisplay } from './search.js'
 import { recipes } from '../dataBase/recipes.js'
 import { showCounterRecipes, countDisplayedRecipes } from './recipesCounter.js'
 
