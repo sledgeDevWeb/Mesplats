@@ -73,6 +73,12 @@ h1 {
   align-items: center;
   padding: 1rem 6rem 3rem 6rem;
 }
+
+.sort__filter{
+  display: flex;
+ 
+}
+
 .sort__filter__categories {
   margin-right: 3rem;
   padding: 0 1rem 0 1rem;

@@ -4,14 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <link rel="stylesheet" href="assets/css/main.css" type="text/css">
-    <link rel="icon" type="image/png" href="img/logo-point.png">
+    <link rel="stylesheet" href="./assets/css/main.css" type="text/css">
+    <!-- <link rel="icon" type="image/png" href="img/logo-point.png"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <title>Les Petits Plats</title>
 </head>
 <body>
 <header class="header">
     <a href="" class="header__home">
-        <img src="img/logo.png" class="header__home__logo" alt="Les Petits Plats Home page">
+        <img src="./assets/images/logo.png" class="header__home__logo" alt="Les Petits Plats Home page">
     </a>
     <h1 class="header__title">CHERCHEZ PARMI PLUS DE 1500 RECETTES<br>
         DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES</h1>
@@ -19,7 +20,7 @@
         <label for="recipe-search"></label>
         <input placeholder="Rechercher une recette, un ingrédient, ..." class="header__search__bar" type="search" id="recipe-search" name="Rechercher une recette, un ingrédient, ...">
         <div class="header__search__container">
-            <svg class="header__search__container__glass w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-widli="1.5" stroke="currentColor">
+            <svg class="header__search__container__glass w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg>
         </div>
@@ -27,28 +28,37 @@
 </header>
 <section class="sort">
     <aside class="sort__filter">
-        <label for="filter-ingredient" class=""></label>
-        <select id="filter-ingredient" class="sort__filter__categories">
-            <option value="byIngredient">Ingrédients</option>
-        </select>
-        <select id="filter-device" class="sort__filter__categories">
-            <option value="byDevice">Appareils</option>
-        </select>
-        <select id="filter-stuff" class="sort__filter__categories">
-            <option value="byStuff">Ustensiles</option>
-        </select>
-        <!--        Construire un sélecteur avec des div plutot que select option-->
+        <section id="filter-ingredient" class="sort__filter__categories">
+            Ingrédients
+            <div id="ingredients-choice" class="choices">
+               <!-- Affiche la recherche du filtre ingrédient -->
+            </div>
+            <i id="ingredients-arrow" class="sort__filter__categories__arrow fa-solid fa-chevron-down"></i>
+        </section>
+        <section id="filter-appliance" class="sort__filter__categories">
+            Appareils
+            <div id="appliance-choice" class="choices">
+                <!-- Affiche la recherche du filtre appareils -->
+            </div>
+            <i id="appliance-arrow" class="sort__filter__categories__arrow fa-solid fa-chevron-down"></i>
+        </section>
+        <section id="filter-ustensil" class="sort__filter__categories">
+            Ustensiles
+            <div id="ustensil-choice" class="choices">
+                <!-- Affiche la recherche du filtre ustensiles -->
+            </div>
+            <i id="ustensil-arrow" class="sort__filter__categories__arrow fa-solid fa-chevron-down"></i>
+        </section>
     </aside>
-    <p id="counter-recipes" class="sort__counter">
-    </p>
+    <p id="counter-recipes" class="sort__counter"></p>
 </section>
+
+<article id="tag-container" class="tag">
+    <!--Affichage des tags-->
+</article>
 <main class="hero">
     <!--Affichage des recettes-->
 </main>
-<script type="module" src="./scripts/dataBase/recipes.js"></script>
-<script type="module" src="./scripts/index.js"></script>
-<script type="module" src="./scripts/functions/searchLoop.js"></script>
-<script type="module" src="./scripts/templates/recipeFactory.js"></script>
-<!-- <script type="module" src="./scripts/templates/tagFactory.js"></script> -->
+<script type="module" src="./scripts/js/index.js"></script>
 </body>
 </html>
