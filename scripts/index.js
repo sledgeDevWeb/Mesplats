@@ -3,6 +3,7 @@ import { recipeTemplate } from './templates/recipeFactory.js'
 import {showCounterRecipes} from './functions/recipes.counter.js'
 
 
+
 console.log(recipes)
 
 // const myRecipes = recipes.find((recipe) => {
